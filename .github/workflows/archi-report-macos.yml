@@ -21,7 +21,7 @@ jobs:
         env:
           ARCHI_EXE: "/Applications/Archi.app/Contents/MacOS/Archi"
           MODEL_PATH: "${{ github.workspace }}"
-          DOCS: "/tmp/reports"
+          DOCS: "${{ github.workspace }}/docs"
         run: |
           "$ARCHI_EXE" -application com.archimatetool.commandline.app \
             -consoleLog -nosplash --abortOnException \
@@ -30,10 +30,12 @@ jobs:
             --html.createReport "$DOCS/"
       - name: Verify
         run: |
-          ls "/tmp/reports"
-      - uses: dfm/force-push-branch-action@v1
-        with:
-          target-branch: "docs"
-          commit-message: "Committing docs update"
-          path: |
-            /tmp/reports/
+          ls "${{ github.workspace }}/docs"
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: docs # The branch name where you want to push the assets
+          FOLDER: docs # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message

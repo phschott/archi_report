@@ -16,9 +16,6 @@ jobs:
         run: |
           brew tap phschott/phs
           brew install phschott/phs/archi@test
-      - name: Verify
-        run: |
-          ls "${{ github.workspace }}"
       - name: Run Archi report (macOS)
         shell: bash
         env:
@@ -31,7 +28,12 @@ jobs:
             --modelrepository2.modelFolder "${{ github.workspace }}/" \
             --modelrepository2.loadModel \
             --html.createReport "$DOCS/"
-
-      - name: Check report
+      - name: Verify
         run: |
-          find "$DOCS/" -type f -name "index.html"
+          ls "/tmp/reports"
+      - uses: dfm/force-push-branch-action@v1
+        with:
+          target-branch: "docs"
+          commit-message: "Committing docs update"
+          path: |
+            /tmp/reports/

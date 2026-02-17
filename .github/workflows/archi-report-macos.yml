@@ -16,11 +16,13 @@ jobs:
         run: |
           brew tap phschott/phs
           brew install phschott/phs/archi@test
-      
+      - name: Verify
+        run: |
+          ls /Applications/
       - name: Run Archi report (macOS)
         shell: bash
         env:
-          ARCHI_EXE: " /Applications/Archi.app/Contents/MacOS/Archi"
+          ARCHI_EXE: "/Applications/Archi.app/Contents/MacOS/Archi"
           MODEL_PATH: "${{ github.workspace }}"
           DOCS: "/tmp/reports"
         run: |

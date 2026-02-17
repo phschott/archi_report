@@ -80,6 +80,7 @@
       <element xsi:type="archimate:BusinessService" name="Customer data mutation Service" id="1220"/>
     </folder>
     <element xsi:type="archimate:BusinessActor" name="PH" id="id-803ae33072794cb3a8ef20b06eb0ee29"/>
+    <element xsi:type="archimate:BusinessRole" name="Actor" id="id-8e5561edd4ff47a5a99780137204a9e4"/>
   </folder>
   <folder name="Application" id="id-1f1ba8cb465e4905baf35675330fef51" type="application">
     <folder name="Applications" id="02643cbc">
@@ -345,6 +346,7 @@
       <element xsi:type="archimate:AssociationRelationship" id="ec3fef51" source="992" target="1089"/>
       <element xsi:type="archimate:AssociationRelationship" id="dd9c00de" source="1101" target="1882"/>
     </folder>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-b40fb8e54b4b45f8ac8a44a635421c8c" source="id-803ae33072794cb3a8ef20b06eb0ee29" target="id-8e5561edd4ff47a5a99780137204a9e4"/>
   </folder>
   <folder name="Views" id="id-e3a632e14ee6428b8f04cc229fdb6433" type="diagrams">
     <element xsi:type="archimate:ArchimateDiagramModel" name="Default View" id="id-aaecf79a8aab45b48ebc091cf00bad84"/>
@@ -1403,6 +1405,10 @@
     <element xsi:type="archimate:ArchimateDiagramModel" name="New view PHS" id="id-0a7cbfbf45a548bda3d3a0b8499c3c88">
       <child xsi:type="archimate:DiagramObject" id="id-0df86f09e5484812a0861831582432e9" archimateElement="id-803ae33072794cb3a8ef20b06eb0ee29">
         <bounds x="349" y="187" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-8d821f17f2a748078079c314b787546a" source="id-0df86f09e5484812a0861831582432e9" target="id-37d8d1f68dfd485a92f4cd205c0460cb" archimateRelationship="id-b40fb8e54b4b45f8ac8a44a635421c8c"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-37d8d1f68dfd485a92f4cd205c0460cb" targetConnections="id-8d821f17f2a748078079c314b787546a" archimateElement="id-8e5561edd4ff47a5a99780137204a9e4">
+        <bounds x="351" y="351" width="120" height="55"/>
       </child>
     </element>
   </folder>

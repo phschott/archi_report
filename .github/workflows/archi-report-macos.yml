@@ -28,10 +28,10 @@ jobs:
         run: |
           "$ARCHI_EXE" -application com.archimatetool.commandline.app \
             -consoleLog -nosplash --abortOnException \
-            --modelrepository2.modelFolder ${{ github.workspace }} \
+            --modelrepository2.modelFolder "${{ github.workspace }}/" \
             --modelrepository2.loadModel
             --html.createReport "$DOCS/"
 
       - name: Check report
         run: |
-          find /tmp -type f -name "index.html"
+          find "$DOCS/" -type f -name "index.html"

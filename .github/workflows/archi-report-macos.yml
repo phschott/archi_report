@@ -28,7 +28,7 @@ jobs:
         run: |
           "$ARCHI_EXE" -application com.archimatetool.commandline.app \
             -consoleLog -nosplash --abortOnException \
-            --modelrepository2.modelFolder "." \
+            --modelrepository2.modelFolder "/Users/runner/work/archi_report/archi_report/" \
             --modelrepository2.loadModel
             --html.createReport "$MODEL_PATH/$DOCS/"
 

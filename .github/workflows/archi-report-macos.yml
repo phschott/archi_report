@@ -1,0 +1,121 @@
+# .github/workflows/archi-report-macos-dmg.yml
+name: Archi HTML Report (macOS - Archi DMG)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  archi-report:
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Archi (macOS - DMG) and install
+        id: archi_macos
+        run: |
+          # Replace with your actual URL if different
+          ARCHI_DMG_URL="https://github.com/archimatetool/archi.io/releases/download/5.7.0/Archi-Mac-Silicon-5.7.0.dmg"
+          mkdir -p Archi
+          curl -L -o Archi/Archi.dmg "$ARCHI_DMG_URL"
+
+          # Mount the DMG
+          MOUNT_OUTPUT=$(hdiutil attach Archi/Archi.dmg -nobrowse -noverify)
+          MOUNT_POINT=$(echo "$MOUNT_OUTPUT" | awk '/Volumes\/.*/ {print $3}' | head -n 1)
+
+          if [ -z "$MOUNT_POINT" ]; then
+            echo "Failed to mount Archi DMG" >&2
+            exit 1
+          fi
+
+          # Find Archi.app inside the mounted volume
+          APP_PATH=$(find "$MOUNT_POINT" -name "Archi.app" -print -quit)
+          if [ -z "$APP_PATH" ]; then
+            echo "Archi.app not found inside DMG" >&2
+            hdiutil detach "$MOUNT_POINT"
+            exit 1
+          fi
+
+          # Copy Archi.app to /Applications
+          sudo cp -R "$APP_PATH" /Applications/
+
+          # Detach the DMG
+          hdiutil detach "$MOUNT_POINT"
+
+          ARCHI_EXE="/Applications/Archi.app/Contents/MacOS/Archi"
+          if [ ! -x "$ARCHI_EXE" ]; then
+            echo "Archi executable not found at $ARCHI_EXE" >&2
+            exit 1
+          fi
+
+          echo "ARCHI_EXE=$ARCHI_EXE" >> "$GITHUB_OUTPUT"
+
+      - name: Install plugins
+        id: install_plugins
+        env:
+          ARCHI_EXE: "${{ steps.archi_macos.outputs.ARCHI_EXE }}"
+        run: |
+          cp -r your-plugins-dir/* "$ARCHI_HOME/plugins/"
+      
+      - name: Run Archi report (macOS)
+        shell: bash
+        env:
+          ARCHI_EXE: "${{ steps.archi_macos.outputs.ARCHI_EXE }}"
+          MODEL_PATH: "${{ github.workspace }}"
+          DOCS: "reports/my-model"
+        run: |
+          "$ARCHI_EXE" -application com.archimatetool.commandline.app \
+            -consoleLog -nosplash --abortOnException \
+            --modelrepository2.modelFolder "$MODEL_PATH/" \
+            --modelrepository2.loadModel
+            --html.createReport "$MODEL_PATH/$DOCS/"
+
+      - name: Push report to docs branch
+        if: always()
+        shell: bash
+        run: |
+          set -e
+          REPO="${{ github.repository }}"
+          BRANCH="docs"
+          MODEL_PATH="${{ github.workspace }}/models"
+          MODEL="my-model"            # adjust as needed
+          DOCS="reports/${MODEL}"
+          SRC="$MODEL_PATH/$DOCS"
+          DEST_DIR="/tmp/docs-branch"
+
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+
+          # Clone the docs branch
+          git clone --depth 1 --branch "$BRANCH" https://github.com/${REPO}.git "$DEST_DIR"
+
+          mkdir -p "$DEST_DIR/$MODEL"
+
+          if [ -d "$SRC" ]; then
+            # Clear existing content for this model and copy new report
+            rm -rf "$DEST_DIR/$MODEL"/*
+            cp -R "$SRC/." "$DEST_DIR/$MODEL/"
+          else
+            echo "Source report not found: $SRC"
+            exit 0
+          fi
+
+          cd "$DEST_DIR"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to docs branch"
+            exit 0
+          else
+            git commit -m "docs: Archi report on $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push origin "$BRANCH"
+          fi
+
+      - name: Clean up
+        if: always()
+        run: |
+          rm -rf Archi
+          echo "Done"

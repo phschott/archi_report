@@ -9,27 +9,26 @@ on:
 
 jobs:
   archi-report:
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Archi
+      - uses: actions/checkout@v4
+      - name: Set up Archi with brew
         run: |
+          brew update
           brew tap phschott/phs
           brew install phschott/phs/archi@test
       - name: Run Archi report (macOS)
         shell: bash
         env:
           ARCHI_EXE: "/Applications/Archi.app/Contents/MacOS/Archi"
-          MODEL_PATH: "${{ github.workspace }}"
-          DOCS: "${{ github.workspace }}/docs"
         run: |
           "$ARCHI_EXE" -application com.archimatetool.commandline.app \
             -consoleLog -nosplash --abortOnException \
             --modelrepository2.modelFolder "${{ github.workspace }}/" \
             --modelrepository2.loadModel \
-            --html.createReport "$DOCS/"
-      - name: Push
-        uses: s0/git-publish-subdir-action@develop
+            --html.createReport "${{ github.workspace }}/docs"
+      - name: Push docs to docs branch (git-publish-subdir-action)
+        uses: s0/git-publish-subdir-action@v2.6.0
         env:
           REPO: self
           BRANCH: docs # The branch name where you want to push the assets

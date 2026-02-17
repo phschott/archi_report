@@ -18,7 +18,7 @@ jobs:
           brew install phschott/phs/archi@test
       - name: Verify
         run: |
-          ls /Applications/
+          pwd
       - name: Run Archi report (macOS)
         shell: bash
         env:
@@ -28,7 +28,7 @@ jobs:
         run: |
           "$ARCHI_EXE" -application com.archimatetool.commandline.app \
             -consoleLog -nosplash --abortOnException \
-            --modelrepository2.modelFolder "$MODEL_PATH/" \
+            --modelrepository2.modelFolder "." \
             --modelrepository2.loadModel
             --html.createReport "$MODEL_PATH/$DOCS/"
 

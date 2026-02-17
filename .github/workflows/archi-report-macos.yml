@@ -18,7 +18,7 @@ jobs:
           brew install phschott/phs/archi@test
       - name: Verify
         run: |
-          pwd
+          ls "${{ github.workspace }}"
       - name: Run Archi report (macOS)
         shell: bash
         env:
@@ -30,7 +30,7 @@ jobs:
             -consoleLog -nosplash --abortOnException \
             --modelrepository2.modelFolder "/Users/runner/work/archi_report/archi_report/" \
             --modelrepository2.loadModel
-            --html.createReport "$MODEL_PATH/$DOCS/"
+            --html.createReport "$DOCS/"
 
       - name: Check report
         run: |

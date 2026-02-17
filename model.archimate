@@ -79,6 +79,7 @@
       <element xsi:type="archimate:BusinessService" name="Claims Payment Service" id="1226"/>
       <element xsi:type="archimate:BusinessService" name="Customer data mutation Service" id="1220"/>
     </folder>
+    <element xsi:type="archimate:BusinessActor" name="PH" id="id-803ae33072794cb3a8ef20b06eb0ee29"/>
   </folder>
   <folder name="Application" id="id-1f1ba8cb465e4905baf35675330fef51" type="application">
     <folder name="Applications" id="02643cbc">
@@ -1397,6 +1398,11 @@
         <child xsi:type="archimate:DiagramObject" id="39407926" archimateElement="3db08b5c">
           <bounds x="204" y="108" width="140" height="55"/>
         </child>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="New view PHS" id="id-0a7cbfbf45a548bda3d3a0b8499c3c88">
+      <child xsi:type="archimate:DiagramObject" id="id-0df86f09e5484812a0861831582432e9" archimateElement="id-803ae33072794cb3a8ef20b06eb0ee29">
+        <bounds x="349" y="187" width="120" height="55"/>
       </child>
     </element>
   </folder>

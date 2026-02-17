@@ -29,7 +29,7 @@ jobs:
           "$ARCHI_EXE" -application com.archimatetool.commandline.app \
             -consoleLog -nosplash --abortOnException \
             --modelrepository2.modelFolder "${{ github.workspace }}/" \
-            --modelrepository2.loadModel
+            --modelrepository2.loadModel \
             --html.createReport "$DOCS/"
 
       - name: Check report

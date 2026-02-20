@@ -79,7 +79,7 @@
       <element xsi:type="archimate:BusinessService" name="Claims Payment Service" id="1226"/>
       <element xsi:type="archimate:BusinessService" name="Customer data mutation Service" id="1220"/>
     </folder>
-    <element xsi:type="archimate:BusinessActor" name="PH" id="id-803ae33072794cb3a8ef20b06eb0ee29"/>
+    <element xsi:type="archimate:BusinessActor" name="PHS" id="id-803ae33072794cb3a8ef20b06eb0ee29"/>
     <element xsi:type="archimate:BusinessRole" name="Actor" id="id-8e5561edd4ff47a5a99780137204a9e4"/>
     <element xsi:type="archimate:BusinessProcess" name="Some process" id="id-2ce74b72d10d4a83a6a9f9a0a33a2c18"/>
   </folder>

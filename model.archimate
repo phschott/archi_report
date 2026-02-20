@@ -82,7 +82,7 @@
     <element xsi:type="archimate:BusinessActor" name="PHS" id="id-803ae33072794cb3a8ef20b06eb0ee29"/>
     <element xsi:type="archimate:BusinessRole" name="Actor" id="id-8e5561edd4ff47a5a99780137204a9e4"/>
     <element xsi:type="archimate:BusinessProcess" name="Some process" id="id-2ce74b72d10d4a83a6a9f9a0a33a2c18"/>
-    <element xsi:type="archimate:BusinessActor" name="Business Actor" id="id-78310f98decf40c499ce02a958502e73"/>
+    <element xsi:type="archimate:BusinessActor" name="Someone" id="id-78310f98decf40c499ce02a958502e73"/>
   </folder>
   <folder name="Application" id="id-1f1ba8cb465e4905baf35675330fef51" type="application">
     <folder name="Applications" id="02643cbc">

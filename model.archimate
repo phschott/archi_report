@@ -82,7 +82,7 @@
     <element xsi:type="archimate:BusinessActor" name="PHS" id="id-803ae33072794cb3a8ef20b06eb0ee29"/>
     <element xsi:type="archimate:BusinessRole" name="Actor" id="id-8e5561edd4ff47a5a99780137204a9e4"/>
     <element xsi:type="archimate:BusinessProcess" name="Some process" id="id-2ce74b72d10d4a83a6a9f9a0a33a2c18"/>
-    <element xsi:type="archimate:BusinessActor" name="Someone else" id="id-78310f98decf40c499ce02a958502e73"/>
+    <element xsi:type="archimate:BusinessActor" name="Someone" id="id-78310f98decf40c499ce02a958502e73"/>
   </folder>
   <folder name="Application" id="id-1f1ba8cb465e4905baf35675330fef51" type="application">
     <folder name="Applications" id="02643cbc">
@@ -1419,7 +1419,7 @@
         <bounds x="552" y="351" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="id-5804ed1a3d184a34866d2dfeb7cd6a30" archimateElement="id-78310f98decf40c499ce02a958502e73">
-        <bounds x="552" y="133" width="120" height="55"/>
+        <bounds x="552" y="187" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="id-e76bb4fdaac743cc8262d09da4808d65" source="id-5804ed1a3d184a34866d2dfeb7cd6a30" target="id-37d8d1f68dfd485a92f4cd205c0460cb" archimateRelationship="id-5a6bf8386c48475894506bc17c3d94e9"/>
       </child>
     </element>

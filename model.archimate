@@ -1425,7 +1425,7 @@
         <sourceConnection xsi:type="archimate:Connection" id="id-e76bb4fdaac743cc8262d09da4808d65" source="id-5804ed1a3d184a34866d2dfeb7cd6a30" target="id-37d8d1f68dfd485a92f4cd205c0460cb" archimateRelationship="id-5a6bf8386c48475894506bc17c3d94e9"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="id-9ee617e5a7a649609f6fc341080a2c71" archimateElement="id-62115a01070a4f829bc2f96b84993bd0">
-        <bounds x="720" y="187" width="120" height="55"/>
+        <bounds x="708" y="60" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="id-370a51a387a54b129745566352f89ef4" source="id-9ee617e5a7a649609f6fc341080a2c71" target="id-37d8d1f68dfd485a92f4cd205c0460cb" archimateRelationship="id-2042236b3cc04824832f374570cb6153"/>
       </child>
     </element>
